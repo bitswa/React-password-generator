@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  
+
   display: grid;
   place-items: center;
   min-height: 100vh;
@@ -14,7 +14,7 @@ body {
 }
 
 .App {
-  width: 300px;
+  width: 340px;
 
   background-color: darkslategray;
   border-radius: 0.5em;
@@ -25,56 +25,63 @@ body {
 
 .password {
   height: 50px;
-  border: 1px solid black;
   border-radius: 0.5em;
-
+  background-color: dimgray;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding-left: 1em;
+}
+
+.password h2 {
+  font-size: 1em;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
-}
-
-.form label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  border: 1px solid black;
-  border-radius: 0.5em;
-
-  padding: 0.5em;
-
-  height: 50px;
-}
-
-.submit {
-  font-weight: 600;
-  cursor: pointer;
-  padding: 1em;
-  height: 50px;
-
-  border: none;
-  border-radius: 0.5em;
+  gap: 1em;
 }
 
 .form__length_label {
   display: flex;
-  gap: 0.5em;
-  padding: 0.5em;
+  padding: 1em;
+  background-color: silver;
+  border-radius: 1em;
 }
 
 .form__length_label input {
   width: 100%;
+  margin: 0 1em;
+}
+
+.form__options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+}
+
+.form__options label {
+  padding: 1em;
+  border-radius: 1em;
+  display: flex;
+  gap: 0.5em;
+  background-color: silver;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit {
+  width: 100%;
+  padding: 1em;
+  border-radius: 1em;
+  border: none;
 }
 
 .hidden-toggle {
   display: none;
-} 
+}
 
 .hidden-toggle:checked ~ .slider {
   background-color: dodgerblue;
@@ -106,4 +113,9 @@ body {
   left: 1px;
   background-color: white;
   transition: all 300ms ease-in-out;
+}
+
+.clipboard {
+  border: none;
+  background: none;
 }
