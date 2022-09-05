@@ -8,6 +8,8 @@ function App() {
   const [number, setNumber] = useState(false);
   const [symbol, setSymbol] = useState(false);
 
+  const [settingsModal, setSettingsModal] = useState(false);
+
   const [selectedList, setSelectedList] = useState([]);
   const [password, setPassword] = useState("");
   const [length, setLength] = useState(4);
@@ -82,6 +84,7 @@ function App() {
       const randomNumber = parseInt(Math.random() * selectedList.length);
       setPassword((prev) => prev + selectedList[randomNumber]);
     }
+    setSettingsModal(true);
   };
 
   useEffect(() => {
@@ -109,25 +112,15 @@ function App() {
 
   return (
     <div className="App">
-      {/* <div className="password">
-        <h2>{password}</h2>
-        <button
-          title={"copy to clipboard: " + password}
-          className="clipboard"
-          onClick={() => navigator.clipboard.writeText(password)}
+      {!settingsModal ? (
+        <form
+          className="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
         >
-          <Clipboard />
-        </button>
-      </div> */}
-      <form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
-        length: {length}
-       
+          <span className="length">{length}</span>
           <label className="form__length_label">
             <span>4</span>
             <input
@@ -139,55 +132,64 @@ function App() {
             />
             <span>32</span>
           </label>
-        
-        <div className="form__options">
-          <label className="switch">
-            Lowercase
-            <input
-              type="checkbox"
-              className="hidden-toggle"
-              onChange={(e) => setLower(e.target.checked)}
-            />
-            <div className="slider">
-              <button></button>
-            </div>
-          </label>
-          <label className="switch">
-            Uppercase
-            <input
-              type="checkbox"
-              className="hidden-toggle"
-              onChange={(e) => setUpper(e.target.checked)}
-            />
-            <div className="slider">
-              <button></button>
-            </div>
-          </label>
-          <label className="switch">
-            Numbers
-            <input
-              type="checkbox"
-              className="hidden-toggle"
-              onChange={(e) => setNumber(e.target.checked)}
-            />
-            <div className="slider">
-              <button></button>
-            </div>
-          </label>
-          <label className="switch">
-            Symbols
-            <input
-              type="checkbox"
-              className="hidden-toggle"
-              onChange={(e) => setSymbol(e.target.checked)}
-            />
-            <div className="slider">
-              <button></button>
-            </div>
-          </label>
+          <div className="form__options">
+            <label className="switch">
+              Lowercase
+              <input
+                type="checkbox"
+                className="hidden-toggle"
+                onChange={(e) => setLower(e.target.checked)}
+              />
+              <div className="slider">
+                <button></button>
+              </div>
+            </label>
+            <label className="switch">
+              Uppercase
+              <input
+                type="checkbox"
+                className="hidden-toggle"
+                onChange={(e) => setUpper(e.target.checked)}
+              />
+              <div className="slider">
+                <button></button>
+              </div>
+            </label>
+            <label className="switch">
+              Numbers
+              <input
+                type="checkbox"
+                className="hidden-toggle"
+                onChange={(e) => setNumber(e.target.checked)}
+              />
+              <div className="slider">
+                <button></button>
+              </div>
+            </label>
+            <label className="switch">
+              Symbols
+              <input
+                type="checkbox"
+                className="hidden-toggle"
+                onChange={(e) => setSymbol(e.target.checked)}
+              />
+              <div className="slider">
+                <button></button>
+              </div>
+            </label>
+          </div>
+          <button className="submit">Submit</button>
+        </form>
+      ) : (
+        <div className="result_div">
+          <h3>{password}</h3>
+          <div>
+            <button onClick={() => setSettingsModal(false)}>Settings</button>
+            <button onClick={() => navigator.clipboard.writeText(password)}>Copy</button>
+          </div>
+          <button onClick={() => handleSubmit()}>Generate</button>
         </div>
-        <button className="submit">Submit</button>
-      </form>
+      )}
     </div>
   );
 }
